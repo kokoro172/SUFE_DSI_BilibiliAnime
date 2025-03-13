@@ -32,27 +32,33 @@ class BiliSpider(scrapy.Spider):
         item = response.meta['item']
         # 番剧名称
         item['name'] = response.xpath('//span[@class="media-info-title-t"]/text()').extract_first()
+
         # 播放量
         play = response.xpath(
             '//span[@class="media-info-count-item media-info-count-item-play"]/em/text()').extract_first()
         item['play'] = self.trans(play)
+
         # 追番数
         follow = response.xpath(
             '//span[@class="media-info-count-item media-info-count-item-fans"]/em/text()').extract_first()
         item['follow'] = self.trans(follow)
+
         # 弹幕数
         barrage = response.xpath(
             '//span[@class="media-info-count-item media-info-count-item-review"]/em/text()').extract_first()
         item['barrage'] = self.trans(barrage)
+
         # 番剧标签
         item['tags'] = response.xpath('//span[@class="media-tag"]/text()').extract()
         item['tags'] = ','.join(item['tags'])
         score = response.xpath('//div[@class="media-info-score-content"]/text()').extract_first()
+
         if score is None: # 防止出现没有评分的情况
             item['score'] = 0
         else:
             item['score'] = float(score)
         numbers = response.xpath('//div[@class="media-info-review-times"]/text()').extract_first()
+
         if numbers is None:
             item['score_num'] = 0
         else:
@@ -61,6 +67,7 @@ class BiliSpider(scrapy.Spider):
         detail_url = "https://api.bilibili.com/pgc/review/short/list?media_id=" + str(
             item['media_id']) + "&ps=30&sort=0"
         yield scrapy.Request(detail_url, callback=self.parse_detailB, meta={'item': item})
+
 
     # 对评论进行整合储存
     def parse_detailB(self, response):
