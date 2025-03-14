@@ -13,11 +13,14 @@ class BiliSpider(scrapy.Spider):
     def parse(self, response):
         data = json.loads(response.text)  # 获取返回数据
         next_index = int(response.url[response.url.rfind("=") + 1:]) + 1
+        print(f"✅ 已抓取：{response.url}")  # 自定义输出
         print(f"下一页：{next_index}")
 
-        if data['data']['size'] == 20 and next_index <= 173: # 20说明还有下一页
+        if data['data']['size'] >= 20 and next_index <= 200: # 20说明还有下一页
             next_url = self.url_head + "&page=" + str(next_index)
             yield scrapy.Request(next_url, callback=self.parse)
+        else:
+            print(f"当前页面size：{data['data']['size']}，next_index={next_index}")
 
         for i in data['data']['list']: # 对每一页进行逐个爬取
             media_id = i['media_id']
@@ -66,7 +69,10 @@ class BiliSpider(scrapy.Spider):
 
         detail_url = "https://api.bilibili.com/pgc/review/short/list?media_id=" + str(
             item['media_id']) + "&ps=30&sort=0"
+        print(f"{item['name']} 已爬取完成")
         yield scrapy.Request(detail_url, callback=self.parse_detailB, meta={'item': item})
+
+
 
 
     # 对评论进行整合储存

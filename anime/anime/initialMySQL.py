@@ -42,5 +42,3 @@ def pymysql_drop_table():
     except:
         print("删表失败")
 
-pymysql_drop_table()
-pymysql_create_table()
