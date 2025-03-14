@@ -60,6 +60,7 @@ mysql -u root -p -e "CREATE DATABASE finalpj CHARACTER SET utf8mb4"
 ```bash
 python initialMySQL.py
 ```
+3. 修改`pipelines.py`为自己的数据库配置
 
 ### 运行爬虫
 **通过终端：** 在anime文件夹里面运行：
