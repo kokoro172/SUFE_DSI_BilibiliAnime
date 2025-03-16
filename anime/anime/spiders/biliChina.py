@@ -6,7 +6,7 @@ from ..items import AnimeItem
 class BiliSpider(scrapy.Spider):
     name = "biliChina"
     #allowed_domains = ["www.bilibili.com"]
-    url_head = "https://api.bilibili.com/pgc/season/index/result?season_version=-1&is_finish=-1&copyright=-1&season_status=-1&year=-1&style_id=-1&order=3&st=4&sort=0&season_type=4&pagesize=20&type=1"
+    url_head = "https://api.bilibili.com/pgc/season/index/result?season_version=-1&is_finish=-1&copyright=-1&season_status=-1&year=-1&style_id=-1&order=2&st=4&sort=0&season_type=4&pagesize=20&type=1"
     start_urls = [url_head + "&page=1"]
 
     # 解析
@@ -15,7 +15,7 @@ class BiliSpider(scrapy.Spider):
         next_index = int(response.url[response.url.rfind("=") + 1:]) + 1
         print(f"下一页：{next_index}")
 
-        if data['data']['size'] == 20 and next_index <= 150: # 20说明还有下一页
+        if next_index <= 150: # 20说明还有下一页
             next_url = self.url_head + "&page=" + str(next_index)
             yield scrapy.Request(next_url, callback=self.parse)
         else:

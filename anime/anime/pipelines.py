@@ -47,6 +47,7 @@ class AnimePipeline:
         self.cursor.close()
         self.connect.close()
 
+'''
 # 保存json的源
 class JsonChunkWriterPipeline:
     def __init__(self, chunk_size=1000):
@@ -125,3 +126,4 @@ class JsonChunkWriterPipeline:
         """爬虫关闭时确保文件正确关闭"""
         if self.current_file:
             self.current_file.close()
+'''

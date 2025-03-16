@@ -2,9 +2,7 @@ import warnings
 # 忽略来自scrapy.selector.unified模块的UserWarning
 warnings.filterwarnings('ignore', category=UserWarning, module='scrapy.selector.unified')
 
-import initialMySQL as im
 import argparse
-import sys
 import os
 from scrapy import cmdline
 

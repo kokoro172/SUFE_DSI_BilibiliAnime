@@ -17,7 +17,7 @@ def pymysql_create_table():
             name text not null,
             score float not null,
             score_num int not null,
-            play int not null,
+            play bigint not null,
             follow int not null,
             barrage int not null,
             tags text not null,
