@@ -25,7 +25,10 @@ class AnimePipeline:
 
     def process_item(self, item, spider):
         try:
-            sql = "insert into anime (media_id,name,score,score_num,play,follow,barrage,tags,comments) values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')"
+            sql = """
+            insert into anime (media_id,name,score,score_num,play,follow,barrage,tags,comments) 
+                        values ('%s','%s','%.1f','%d','%d','%d','%d','%s','%s'); 
+            """
             self.cursor.execute(sql % (item['media_id'],item['name'],item['score'],item['score_num'],item['play'],item['follow'],item['barrage'],item['tags'],item['comments']))
             self.connect.commit()
             print(f"{item['name']} 的数据插入成功")

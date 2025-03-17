@@ -6,7 +6,7 @@ from ..items import AnimeItem
 class BiliSpider(scrapy.Spider):
     name = "bili"
     #allowed_domains = ["www.bilibili.com"]
-    url_head = "https://api.bilibili.com/pgc/season/index/result?st=1&order=3&season_version=-1&spoken_language_type=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=-1&year=-1&style_id=-1&sort=0&season_type=1&pagesize=20&type=1"
+    url_head = "https://api.bilibili.com/pgc/season/index/result?st=1&order=2&season_version=-1&spoken_language_type=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=-1&year=-1&style_id=-1&sort=0&season_type=1&pagesize=20&type=1"
     start_urls = [url_head + "&page=1"]
 
     # 解析

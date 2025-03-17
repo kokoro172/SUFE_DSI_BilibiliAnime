@@ -8,6 +8,7 @@ connection = pymysql.connect(host='localhost',
                              charset='utf8mb4'
                              ) # 直接让它返回默认的元组
 
+# 建表
 def pymysql_create_table():
     try:
         with connection.cursor() as cursor:
@@ -23,6 +24,12 @@ def pymysql_create_table():
             tags text not null,
             comments text
             );
+            CREATE TABLE finalpj.media_tags (
+            media_id INT NOT NULL,
+            tag VARCHAR(255) NOT NULL,
+            play BIGINT,
+            PRIMARY KEY (media_id, tag)
+            );
             '''
             cursor.execute(sql)
         connection.commit()
@@ -30,6 +37,7 @@ def pymysql_create_table():
     except:
         print("建表失败")
 
+# 删表
 def pymysql_drop_table():
     try:
         with connection.cursor() as cursor:
@@ -41,4 +49,5 @@ def pymysql_drop_table():
         print("删表成功")
     except:
         print("删表失败")
+
 

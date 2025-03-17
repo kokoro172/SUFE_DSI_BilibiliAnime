@@ -39,5 +39,5 @@ if __name__ == "__main__":
     # im.pymysql_drop_table()
     # im.pymysql_create_table()
     # #
-    #cmdline.execute(['scrapy', 'crawl', 'bili'])
-    cmdline.execute(['scrapy', 'crawl', 'biliChina'])
+    cmdline.execute(['scrapy', 'crawl', 'bili'])
+    #cmdline.execute(['scrapy', 'crawl', 'biliChina'])
